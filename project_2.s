@@ -61,3 +61,6 @@ len_loop:
 len_done:
     move $t3, $t1            # $t3 now holds the input length
 
+    la   $t0, input_buffer
+    add  $t0, $t0, $t3       # point to just after the last valid character
+    sb   $zero, 0($t0)       # force null terminator there
