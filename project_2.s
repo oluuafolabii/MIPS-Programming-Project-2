@@ -64,3 +64,9 @@ len_done:
     la   $t0, input_buffer
     add  $t0, $t0, $t3       # point to just after the last valid character
     sb   $zero, 0($t0)       # force null terminator there
+
+    addi $t4, $t3, 9         # length + 9
+    li   $t5, 10
+    div  $t4, $t5
+    mflo $t6                 # $t6 = number of substrings
+
