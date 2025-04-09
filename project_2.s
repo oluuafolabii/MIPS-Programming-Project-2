@@ -70,3 +70,8 @@ len_done:
     div  $t4, $t5
     mflo $t6                 # $t6 = number of substrings
 
+    la   $s6, input_buffer   # base address of input
+    li   $t7, 0              # overall input index
+    li   $t8, 0              # substring counter (0-indexed)
+    li   $s4, 10             # constant 10
+
