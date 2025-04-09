@@ -112,3 +112,14 @@ print_null:
     li   $v0, 4              # syscall: print string
     syscall
 
+semicolon_check:
+    addi $s5, $t8, 1         # $s5 = current substring counter + 1 (using $s5)
+    blt  $s5, $t6, print_sc  # if not last substring, jump to print semicolon
+    j    incr_loop
+print_sc:
+    la   $a0, semicolon_str
+    li   $v0, 4
+    syscall
+incr_loop:
+    addi $t8, $t8, 1         # increment substring counter
+    j    main_loop
