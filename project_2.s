@@ -183,3 +183,35 @@ sh_loop:
     bge  $t0, $t1, calc_done
     add  $t2, $a0, $t0
     lb   $t3, 0($t2)
+
+    li   $t4, 48
+    li   $t5, 57
+    blt  $t3, $t4, sh_lower
+    bgt  $t3, $t5, sh_lower
+    subu $t6, $t3, $t4
+    add  $s2, $s2, $t6
+    addi $s0, $s0, 1
+    j    sh_next
+sh_lower:
+    li   $t4, 97
+    li   $t5, 119
+    blt  $t3, $t4, sh_upper
+    bgt  $t3, $t5, sh_upper
+    subu $t6, $t3, $t4
+    addi $t6, $t6, 10
+    add  $s2, $s2, $t6
+    addi $s0, $s0, 1
+    j    sh_next
+sh_upper:
+    li   $t4, 65
+    li   $t5, 87
+    blt  $t3, $t4, sh_next
+    bgt  $t3, $t5, sh_next
+    subu $t6, $t3, $t4
+    addi $t6, $t6, 10
+    add  $s2, $s2, $t6
+    addi $s0, $s0, 1
+sh_next:
+    addi $t0, $t0, 1
+    j    sh_loop
+
