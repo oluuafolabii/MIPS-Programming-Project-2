@@ -123,3 +123,7 @@ print_sc:
 incr_loop:
     addi $t8, $t8, 1         # increment substring counter
     j    main_loop
+
+main_done:
+    li   $v0, 10
+    syscall
