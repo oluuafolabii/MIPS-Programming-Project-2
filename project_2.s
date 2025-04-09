@@ -22,3 +22,12 @@ zero_loop:
     j    zero_loop
 zero_done:
 
+    la   $a0, prompt           # print prompt
+    li   $v0, 4
+    syscall
+
+    la   $a0, input_buffer
+    li   $a1, 1000             # read up to 1000 characters
+    li   $v0, 8
+    syscall
+
