@@ -127,3 +127,11 @@ incr_loop:
 main_done:
     li   $v0, 10
     syscall
+
+# Subroutine entry: save callee-saved registers.
+get_substring_value:
+    addi $sp, $sp, -12
+    sw   $s0, 0($sp)
+    sw   $s1, 4($sp)
+    sw   $s2, 8($sp)
+
