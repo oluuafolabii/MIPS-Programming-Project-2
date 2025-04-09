@@ -135,3 +135,13 @@ get_substring_value:
     sw   $s1, 4($sp)
     sw   $s2, 8($sp)
 
+    li   $s0, 0       # count of valid characters
+    li   $s1, 0       # sum for first half
+    li   $s2, 0       # sum for second half
+    li   $t0, 0       # index = 0
+first_half_loop:
+    li   $t1, 5
+    bge  $t0, $t1, sh_start
+    add  $t2, $a0, $t0
+    lb   $t3, 0($t2)
+
