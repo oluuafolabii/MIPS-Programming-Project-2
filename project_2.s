@@ -49,3 +49,15 @@ kill_char:
     sb   $zero, 0($t0)       # replace with null
     j    strip_done
 strip_done:
+
+    la   $t0, input_buffer
+    li   $t1, 0              # counter = 0
+len_loop:
+    lb   $t2, 0($t0)
+    beq  $t2, $zero, len_done
+    addi $t1, $t1, 1
+    addi $t0, $t0, 1
+    j    len_loop
+len_done:
+    move $t3, $t1            # $t3 now holds the input length
+
