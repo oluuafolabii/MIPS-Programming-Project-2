@@ -75,3 +75,6 @@ len_done:
     li   $t8, 0              # substring counter (0-indexed)
     li   $s4, 10             # constant 10
 
+main_loop:
+    bge  $t8, $t6, main_done  # if substring counter >= num_substrings, exit loop
+
