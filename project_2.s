@@ -98,3 +98,17 @@ copy_done:
     la   $t9, substring
     sb   $zero, 10($t9)      # null-terminate the substring
 
+    la   $a0, substring
+    jal  get_substring_value   # result in $v0
+
+    li   $s7, 0x7FFFFFF       # flag value for invalid substring
+    beq  $v0, $s7, print_null
+    move $a0, $v0
+    li   $v0, 1              # syscall: print integer
+    syscall
+    j    semicolon_check
+print_null:
+    la   $a0, null_str
+    li   $v0, 4              # syscall: print string
+    syscall
+
