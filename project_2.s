@@ -215,3 +215,15 @@ sh_next:
     addi $t0, $t0, 1
     j    sh_loop
 
+calc_done:
+    beq  $s0, $zero, no_valid
+    subu $v0, $s1, $s2
+    j    restore_sub
+no_valid:
+    li   $v0, 0x7FFFFFF
+restore_sub:
+    lw   $s0, 0($sp)
+    lw   $s1, 4($sp)
+    lw   $s2, 8($sp)
+    addi $sp, $sp, 12
+    jr   $ra
