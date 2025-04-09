@@ -145,3 +145,34 @@ first_half_loop:
     add  $t2, $a0, $t0
     lb   $t3, 0($t2)
 
+    li   $t4, 48      # check digit range: '0'
+    li   $t5, 57      # '9'
+    blt  $t3, $t4, fh_lower
+    bgt  $t3, $t5, fh_lower
+    subu $t6, $t3, $t4
+    add  $s1, $s1, $t6
+    addi $s0, $s0, 1
+    j    fh_next
+fh_lower:
+    li   $t4, 97      # check lowercase range: 'a'
+    li   $t5, 119     # 'w'
+    blt  $t3, $t4, fh_upper
+    bgt  $t3, $t5, fh_upper
+    subu $t6, $t3, $t4
+    addi $t6, $t6, 10
+    add  $s1, $s1, $t6
+    addi $s0, $s0, 1
+    j    fh_next
+fh_upper:
+    li   $t4, 65      # check uppercase range: 'A'
+    li   $t5, 87      # 'W'
+    blt  $t3, $t4, fh_next
+    bgt  $t3, $t5, fh_next
+    subu $t6, $t3, $t4
+    addi $t6, $t6, 10
+    add  $s1, $s1, $t6
+    addi $s0, $s0, 1
+fh_next:
+    addi $t0, $t0, 1
+    j    first_half_loop
+
