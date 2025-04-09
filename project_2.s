@@ -176,3 +176,10 @@ fh_next:
     addi $t0, $t0, 1
     j    first_half_loop
 
+sh_start:
+    li   $t0, 5       # start index for second half
+sh_loop:
+    li   $t1, 10
+    bge  $t0, $t1, calc_done
+    add  $t2, $a0, $t0
+    lb   $t3, 0($t2)
