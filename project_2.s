@@ -31,3 +31,7 @@ zero_done:
     li   $v0, 8
     syscall
 
+    la   $t0, input_buffer     
+    addi $t0, $t0, 1000        
+    sb   $zero, 0($t0)         # enforce null terminator at end
+
