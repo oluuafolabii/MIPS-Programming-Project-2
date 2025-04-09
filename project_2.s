@@ -35,3 +35,17 @@ zero_done:
     addi $t0, $t0, 1000        
     sb   $zero, 0($t0)         # enforce null terminator at end
 
+    la   $t0, input_buffer
+strip_loop:
+    lb   $t2, 0($t0)
+    beq  $t2, $zero, strip_done
+    li   $t3, 10             # LF
+    beq  $t2, $t3, kill_char
+    li   $t3, 13             # CR
+    beq  $t2, $t3, kill_char
+    addi $t0, $t0, 1
+    j    strip_loop
+kill_char:
+    sb   $zero, 0($t0)       # replace with null
+    j    strip_done
+strip_done:
