@@ -8,3 +8,7 @@ substring:      .space 11     # 10 chars + null
 semicolon_str:  .asciiz ";"
 null_str:       .asciiz "NULL"
 
+.text
+.globl main
+main:
+
