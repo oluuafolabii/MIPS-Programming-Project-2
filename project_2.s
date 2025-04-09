@@ -78,3 +78,23 @@ len_done:
 main_loop:
     bge  $t8, $t6, main_done  # if substring counter >= num_substrings, exit loop
 
+    la   $t9, substring      # pointer to substring buffer
+    li   $s3, 0              # inner loop counter for 10 chars
+copy_loop:
+    bge  $s3, $s4, copy_done  # if 10 characters copied, exit loop
+    blt  $t7, $t3, copy_valid # if there is still input, copy character
+    li   $t1, 32             # pad with space if no input remains
+    j    copy_store
+copy_valid:
+    add  $t2, $s6, $t7       # compute address: base + input index
+    lb   $t1, 0($t2)         # load character
+copy_store:
+    sb   $t1, 0($t9)         # store into substring buffer
+    addi $t9, $t9, 1
+    addi $s3, $s3, 1         # increment inner loop counter
+    addi $t7, $t7, 1         # increment overall input index
+    j    copy_loop
+copy_done:
+    la   $t9, substring
+    sb   $zero, 10($t9)      # null-terminate the substring
+
